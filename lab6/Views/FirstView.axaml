@@ -5,6 +5,11 @@
         mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
         x:Class="lab6.Views.FirstView">
 	<UserControl.Styles>
+		<Style Selector="TextBlock.t">
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="VerticalAlignment" Value="Stretch"/>
+			<Setter Property="Margin" Value="10,0,0,0"/>
+		</Style>
 		<Style Selector="DatePicker.d">
 			<Setter Property="HorizontalAlignment" Value="Stretch"/>
 			<Setter Property="VerticalAlignment" Value="Top"/>
@@ -35,11 +40,17 @@
 							<Grid.RowDefinitions>
 								<RowDefinition MinHeight="30" Height="*" MaxHeight="50"/>
 							</Grid.RowDefinitions>
-							<TextBox Text="{Binding Name}" Grid.Row="0" Grid.Column="0" Focusable="False"/>
-							<Button Classes="b" Grid.Row="0" Grid.Column="1">
+							<Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="1">
+								<TextBlock Classes="t" Text="{Binding Name}" Focusable="False"/>
+							</Border>
+							<Button Name="ZoomButton" Classes="b" Grid.Row="0" Grid.Column="1"
+									Command="{Binding $parent[Window].DataContext.Button_Zoom}"
+									CommandParameter="{Binding}">
 								<Image Classes="i" Source="/Assets/in_zoom.ico"></Image>
 							</Button>
-							<Button Classes="b" Grid.Row="0" Grid.Column="2">
+							<Button Name="DeleteButton" Classes="b" Grid.Row="0" Grid.Column="2"
+									Command="{Binding $parent[Window].DataContext.Button_Delete}"
+									CommandParameter="{Binding}">
 								<Image Classes="i" Source="/Assets/trash.ico"></Image>
 							</Button>
 						</Grid>
@@ -47,7 +58,7 @@
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
 		</ScrollViewer>
-		<Button Classes="b" Grid.Row="2">
+		<Button Name="AddButton" Classes="b" Grid.Row="2" Command="{Binding $parent[Window].DataContext.Button_Add}">
 			<Image Classes="i" Source="/Assets/add.ico"></Image>
 		</Button>
 	</Grid>

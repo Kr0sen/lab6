@@ -8,9 +8,9 @@ namespace lab6.Models
 {
     public class Plan
     {
-        public string Name { get; private set; }
-        public string Todo { get; private set; }
-        public DateTime Date { get; private set; }
+        public string Name { get; set; }
+        public string Todo { get; set; }
+        public DateTime Date { get; set; }
 
         public Plan(string name, string todo, DateTime date)
         {

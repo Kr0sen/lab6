@@ -1,6 +1,7 @@
 using System;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using lab6.ViewModels;
 
@@ -12,7 +13,8 @@ namespace lab6.Views
         {
             InitializeComponent();
             this.FindControl<DatePicker>("DatePickerFv").SelectedDate = DateTime.Today;
-            this.FindControl<DatePicker>("DatePickerFv").SelectedDateChanged += new EventHandler<DatePickerSelectedValueChangedEventArgs>(DatePicker_SelectedDateChanged);
+            this.FindControl<DatePicker>("DatePickerFv").SelectedDateChanged +=
+                new EventHandler<DatePickerSelectedValueChangedEventArgs>(DatePicker_SelectedDateChanged);
         }
 
         private void InitializeComponent()
@@ -22,7 +24,8 @@ namespace lab6.Views
 
         private void DatePicker_SelectedDateChanged(object sender, DatePickerSelectedValueChangedEventArgs e)
         {
-            (this.DataContext as FirstViewModel).changeItems(DateTime.Parse(this.FindControl<DatePicker>("DatePickerFv").SelectedDate.ToString()));
+            (this.DataContext as FirstViewModel).changeItems
+                (DateTime.Parse(this.FindControl<DatePicker>("DatePickerFv").SelectedDate.ToString()));
         }
     }
 }

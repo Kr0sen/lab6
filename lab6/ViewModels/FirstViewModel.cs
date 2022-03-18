@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ReactiveUI;
+using System.Reactive;
 using System.Reactive.Linq;
 using lab6.Models;
 
@@ -12,20 +13,32 @@ namespace lab6.ViewModels
 {
     public class FirstViewModel : ViewModelBase
     {
-        public FirstViewModel(Plan[] ItemsAll)
+        public FirstViewModel(List<Plan> ItemsAll)
         {
             itemsAll = ItemsAll;
-            changeItems(DateTime.Today);
+            currentDate = DateTime.Today;
+            changeItems();
         }
-        public void changeItems(DateTime SelectedTime)
+        public void changeItems()
         {
             items.Clear();
             foreach (var item in itemsAll)
             {
-                if (item.Date.Equals(SelectedTime)) items.Add(item);
+                if (item.Date.Equals(currentDate)) items.Add(item);
             }
             ItemsSelected = new ObservableCollection<Plan>(items);
         }
+        public void changeItems(DateTime SelectedDate)
+        {
+            currentDate = SelectedDate;
+            items.Clear();
+            foreach (var item in itemsAll)
+            {
+                if (item.Date.Equals(currentDate)) items.Add(item);
+            }
+            ItemsSelected = new ObservableCollection<Plan>(items);
+        }
+
         public ObservableCollection<Plan> itemsSelected;
         public ObservableCollection<Plan> ItemsSelected
         {
@@ -33,12 +46,13 @@ namespace lab6.ViewModels
             {
                 return itemsSelected;
             }
-            set 
-            { 
-                this.RaiseAndSetIfChanged(ref itemsSelected, value); 
-            } 
+            set
+            {
+                this.RaiseAndSetIfChanged(ref itemsSelected, value);
+            }
         }
         private List<Plan> items = new List<Plan>();
-        private Plan[] itemsAll;
+        private List<Plan> itemsAll;
+        public DateTime currentDate;
     }
 }
