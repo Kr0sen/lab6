@@ -12,20 +12,11 @@ namespace lab6.Views
         public FirstView()
         {
             InitializeComponent();
-            this.FindControl<DatePicker>("DatePickerFv").SelectedDate = DateTime.Today;
-            this.FindControl<DatePicker>("DatePickerFv").SelectedDateChanged +=
-                new EventHandler<DatePickerSelectedValueChangedEventArgs>(DatePicker_SelectedDateChanged);
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-        }
-
-        private void DatePicker_SelectedDateChanged(object sender, DatePickerSelectedValueChangedEventArgs e)
-        {
-            (this.DataContext as FirstViewModel).changeItems
-                (DateTime.Parse(this.FindControl<DatePicker>("DatePickerFv").SelectedDate.ToString()));
         }
     }
 }

@@ -24,17 +24,7 @@ namespace lab6.ViewModels
             items.Clear();
             foreach (var item in itemsAll)
             {
-                if (item.Date.Equals(currentDate)) items.Add(item);
-            }
-            ItemsSelected = new ObservableCollection<Plan>(items);
-        }
-        public void changeItems(DateTime SelectedDate)
-        {
-            currentDate = SelectedDate;
-            items.Clear();
-            foreach (var item in itemsAll)
-            {
-                if (item.Date.Equals(currentDate)) items.Add(item);
+                if (item.Date.Equals(CurrentDate)) items.Add(item);
             }
             ItemsSelected = new ObservableCollection<Plan>(items);
         }
@@ -53,6 +43,15 @@ namespace lab6.ViewModels
         }
         private List<Plan> items = new List<Plan>();
         private List<Plan> itemsAll;
-        public DateTime currentDate;
+        DateTimeOffset currentDate;
+        public DateTimeOffset CurrentDate
+        {
+            get { return currentDate; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref currentDate, value);
+                changeItems();
+            }
+        }
     }
 }

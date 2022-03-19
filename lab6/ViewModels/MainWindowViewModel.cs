@@ -19,7 +19,7 @@ namespace lab6.ViewModels
             Button_Add = ReactiveCommand.Create<Unit, Unit>(
                 (unit) =>
                 {
-                    var newItem = new Plan("", "", Fv.currentDate);
+                    var newItem = new Plan("", "", Fv.CurrentDate);
                     var sv = new SecondViewModel(newItem);
                     Observable.Merge(
                 sv.OK,

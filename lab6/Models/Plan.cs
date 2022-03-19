@@ -10,9 +10,9 @@ namespace lab6.Models
     {
         public string Name { get; set; }
         public string Todo { get; set; }
-        public DateTime Date { get; set; }
+        public DateTimeOffset Date { get; set; }
 
-        public Plan(string name, string todo, DateTime date)
+        public Plan(string name, string todo, DateTimeOffset date)
         {
             Name = name;
             Todo = todo;
